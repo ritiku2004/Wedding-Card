@@ -256,7 +256,10 @@
             opacity: 0;
             visibility: hidden;
             pointer-events: none;
-            transform: scale(1.1);
+            transform: scale(1.05);
+            /* Subtle scale up for dissolve effect */
+            transition: all 2s ease-in-out;
+            /* Much smoother fade */
         }
 
         /* Background Pattern */
@@ -372,8 +375,8 @@
                 </div>
                 <div class="envelope-pocket"></div>
                 <div class="envelope-content">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Ganesha_vector_silhouette.svg/1200px-Ganesha_vector_silhouette.svg.png"
-                        class="w-8 opacity-80 mb-2 drop-shadow-sm" alt="Ganesh">
+                    <img src="FirstCardGanesh.png" class="w-16 h-auto object-contain mb-2 drop-shadow-sm"
+                        alt="Ganesh Card">
                     <p class="text-maroon font-bold text-2xl" style="font-family: 'Great Vibes', cursive;">Nimantran</p>
                     <div class="h-px w-10 bg-gold-primary my-1"></div>
                     <p class="text-[10px] uppercase tracking-widest text-stone-500 font-bold">Wedding Invitation</p>
@@ -414,12 +417,12 @@
             </div>
 
             <!-- Guest Welcome -->
-            <div id="guest-box" class="hidden mb-10">
+            <!-- <div id="guest-box" class="hidden mb-10">
                 <p class="text-gray-400 text-[10px] uppercase tracking-[0.3em] mb-2">सादर आमंत्रण</p>
                 <h2 id="guest-name"
                     class="text-3xl md:text-5xl text-maroon font-bold font-serif border-y border-gold-primary/30 py-2">
                 </h2>
-            </div>
+            </div> -->
 
             <!-- Title -->
             <div class="mb-12 mt-20 relative z-10 p-4">
@@ -521,9 +524,9 @@
             const guest = params.get('guest');
             if (guest) {
                 // Add double quotes around the name as requested
-                document.getElementById('guest-name').innerText = `"${guest}"`;
+                // document.getElementById('guest-name').innerText = `"${guest}"`;
                 document.getElementById('env-guest').innerText = `To: "${guest}"`;
-                document.getElementById('guest-box').classList.remove('hidden');
+                // document.getElementById('guest-box').classList.remove('hidden');
             }
         });
 
@@ -537,7 +540,7 @@
 
             // Wait longer for the realistic animation (flap + slide out)
             setTimeout(() => {
-                // document.body.classList.add('opened'); // Removed auto-hide as requested
+                document.body.classList.add('opened');
 
                 // Show music button
                 musicBtn.classList.remove('hidden');
@@ -552,7 +555,7 @@
                     // Update icon to show muted state if play failed
                     musicBtn.innerText = '🔇';
                 });
-            }, 3500); // Increased duration for full sequence
+            }, 2200); // Reduced duration for faster transition
         }
 
         function toggleMusic() {
