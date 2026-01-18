@@ -364,7 +364,7 @@
     </button>
 
     <!-- Intro Envelope -->
-    <div id="intro-overlay">
+    <div id="intro-overlay" onclick="openInvitation()" class="cursor-pointer">
         <div class="intro-pattern"></div>
         <div class="intro-mandala"></div>
 
@@ -536,6 +536,8 @@
 
         function openInvitation() {
             const env = document.getElementById('main-envelope');
+            if (env.classList.contains('open')) return; // Prevent double trigger
+
             env.classList.add('open');
 
             // Wait longer for the realistic animation (flap + slide out)
