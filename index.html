@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="hi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>सुरेंद्र संग आरती - शुभ विवाह</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        maroon: '#680000',
+                        'gold-primary': '#D4AF37',
+                        'cream-paper': '#FFFDF5',
+                    },
+                    fontFamily: {
+                        serif: ['Playfair Display', 'serif'],
+                        devanagari: ['Noto Sans Devanagari', 'sans-serif'],
+                        cursive: ['Great Vibes', 'cursive'],
+                        yatra: ['Yatra One', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Noto+Sans+Devanagari:wght@400;500;700;800&family=Cinzel:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Yatra+One&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --royal-maroon: #680000;
+            --velvet-red: #8B0000;
+            --gold-primary: #D4AF37;
+            --cream-paper: #FFFDF5;
+        }
+
+        body {
+            background-color: #1a0505;
+            font-family: 'Noto Sans Devanagari', sans-serif;
+            color: #2d0a0a;
+            overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Deluxe Gold Text */
+        /* Deluxe Gold Text - Darkened for Visibility on Cream */
+        .gold-text-premium {
+            background: linear-gradient(135deg, #996515 0%, #d4af37 25%, #8b5a00 50%, #d4af37 75%, #996515 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.4));
+        }
+
+        /* Responsive Card */
+        .glass-card {
+            background: rgba(255, 253, 245, 0.98);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            width: 95%;
+            /* Better width for mobile */
+            max-width: 600px;
+            margin: auto;
+            position: relative;
+            transform: translateZ(0);
+            /* Hardware accel */
+        }
+
+        /* Inner Traditional Frame */
+        .traditional-frame {
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            border-radius: 1rem;
+            position: absolute;
+            inset: 12px;
+            pointer-events: none;
+            z-index: 0;
+            mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+            /* Fade out at bottom */
+        }
+
+        /* Deluxe Intro Overlay */
+        #intro-overlay {
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle at center, #500000 0%, #1a0000 100%);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: all 1.5s cubic-bezier(0.86, 0, 0.07, 1);
+            padding: 20px;
+            overflow: hidden;
+        }
+
+        .intro-pattern {
+            position: absolute;
+            inset: 0;
+            opacity: 0.1;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23d4af37' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            pointer-events: none;
+        }
+
+        .intro-mandala {
+            position: absolute;
+            width: 120vw;
+            height: 120vw;
+            background: url("https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Ganesha_vector_silhouette.svg/1200px-Ganesha_vector_silhouette.svg.png");
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            opacity: 0.03;
+            animation: mandalaSpin 60s linear infinite;
+            filter: invert(1);
+        }
+
+        .envelope {
+            width: 100%;
+            max-width: 340px;
+            height: 240px;
+            background: #750000;
+            position: relative;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.8), 0 0 0 1px #9b7E2E;
+            border-radius: 4px;
+            transform-style: preserve-3d;
+            perspective: 1500px;
+            z-index: 10;
+        }
+
+        .envelope-flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #880000;
+            clip-path: polygon(0 0, 50% 55%, 100% 0);
+            transform-origin: top;
+            transition: transform 0.8s cubic-bezier(0.45, 0, 0.55, 1);
+            z-index: 50;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: center;
+            transform-style: preserve-3d;
+            backface-visibility: hidden;
+            /* Hide back to reveal content behind if needed, but here we want to see the "open" flap */
+        }
+
+        /* Inner part of flap visible when opened */
+        .envelope-flap::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: #680000;
+            /* Darker inside color */
+            transform: rotateX(180deg);
+            backface-visibility: hidden;
+            z-index: -1;
+            clip-path: polygon(0 0, 50% 55%, 100% 0);
+        }
+
+        /* Wax Seal */
+        .wax-seal {
+            width: 50px;
+            height: 50px;
+            background: radial-gradient(circle at 30% 30%, #ffdf80, #bf953f, #8a6e2f);
+            border-radius: 50%;
+            position: absolute;
+            top: 45%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.4);
+            border: 2px solid #a67c00;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: #5c410a;
+            font-weight: bold;
+            z-index: 51;
+            /* Keep visible during rotation */
+        }
+
+        .envelope-pocket {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, #650000, #750000);
+            clip-path: polygon(0 100%, 0 45%, 50% 100%, 100% 45%, 100% 100%);
+            z-index: 40;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .envelope-content {
+            position: absolute;
+            inset: 15px;
+            background: var(--cream-paper);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.8s ease-out;
+            transition-delay: 0.9s;
+            /* Strictly sequence: Flap (0.8s) -> Card */
+            z-index: 5;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border: 1px solid #D4AF37;
+        }
+
+        /* Shahi Button */
+        .shahi-btn {
+            background: transparent;
+            border: 1px solid #D4AF37;
+            color: #D4AF37;
+            padding: 12px 40px;
+            border-radius: 50px;
+            font-family: 'Cinzel', serif;
+            letter-spacing: 2px;
+            font-weight: 700;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.1);
+            margin-top: 3rem;
+            backdrop-filter: blur(5px);
+        }
+
+        .shahi-btn:hover {
+            background: rgba(212, 175, 55, 0.1);
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+            transform: translateY(-2px);
+            letter-spacing: 4px;
+        }
+
+
+        .envelope.open .envelope-flap {
+            transform: rotateX(180deg);
+            z-index: 1;
+        }
+
+        .envelope.open .envelope-content {
+            transform: translateY(-120px) scale(1.05);
+            /* Slide up higher and slightly grow */
+            z-index: 30;
+            transition-delay: 0.9s;
+            /* Wait strictly for flap to finish */
+        }
+
+        .opened #intro-overlay {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transform: scale(1.1);
+        }
+
+        /* Background Pattern */
+        .royal-bg {
+            background-color: var(--cream-paper);
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23d4af37' fill-opacity='0.08'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        /* Animations */
+        @keyframes mandalaSpin {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .mandala-bg {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 150vw;
+            height: 150vw;
+            margin: -75vw 0 0 -75vw;
+            opacity: 0.05;
+            z-index: -1;
+            animation: mandalaSpin 100s linear infinite;
+        }
+
+        .petal {
+            position: fixed;
+            background: #ff4d4d;
+            border-radius: 150% 0 150% 0;
+            pointer-events: none;
+            z-index: 999;
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(110vh) rotate(540deg);
+                opacity: 0;
+            }
+        }
+
+        /* Corners */
+        .corner {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            background: url('https://www.transparenttextures.com/patterns/gold-scale.png');
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        .tl {
+            top: 0;
+            left: 0;
+            border-top: 4px solid var(--gold-primary);
+            border-left: 4px solid var(--gold-primary);
+            border-top-left-radius: 20px;
+        }
+
+        .tr {
+            top: 0;
+            right: 0;
+            border-top: 4px solid var(--gold-primary);
+            border-right: 4px solid var(--gold-primary);
+            border-top-right-radius: 20px;
+        }
+
+        .bl {
+            bottom: 0;
+            left: 0;
+            border-bottom: 4px solid var(--gold-primary);
+            border-left: 4px solid var(--gold-primary);
+            border-bottom-left-radius: 20px;
+        }
+
+        .br {
+            bottom: 0;
+            right: 0;
+            border-bottom: 4px solid var(--gold-primary);
+            border-right: 4px solid var(--gold-primary);
+            border-bottom-right-radius: 20px;
+        }
+    </style>
+</head>
+
+<body class="royal-bg">
+
+    <audio id="bg-music" loop>
+        <source src="indian-india-hindi-song-music-392214.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Music Toggle Button (Restored) -->
+    <button id="music-btn" onclick="toggleMusic()"
+        class="fixed top-4 right-4 z-50 w-10 h-10 bg-white/80 border border-gold-primary rounded-full shadow-lg flex items-center justify-center text-xl transition hover:scale-105 hidden">
+        🎵
+    </button>
+
+    <!-- Intro Envelope -->
+    <div id="intro-overlay">
+        <div class="intro-pattern"></div>
+        <div class="intro-mandala"></div>
+
+        <div class="flex flex-col items-center relative z-10 w-full">
+            <div class="envelope" id="main-envelope">
+                <div class="envelope-flap">
+                    <div class="wax-seal">ॐ</div>
+                </div>
+                <div class="envelope-pocket"></div>
+                <div class="envelope-content">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Ganesha_vector_silhouette.svg/1200px-Ganesha_vector_silhouette.svg.png"
+                        class="w-8 opacity-80 mb-2 drop-shadow-sm" alt="Ganesh">
+                    <p class="text-maroon font-bold text-2xl" style="font-family: 'Great Vibes', cursive;">Nimantran</p>
+                    <div class="h-px w-10 bg-gold-primary my-1"></div>
+                    <p class="text-[10px] uppercase tracking-widest text-stone-500 font-bold">Wedding Invitation</p>
+                    <p id="env-guest" class="text-[10px] text-maroon font-serif italic mt-2 px-4 truncate w-full"></p>
+                </div>
+            </div>
+
+            <button onclick="openInvitation()" class="shahi-btn group">
+                <span class="relative z-10">॥ शुभ विवाह ॥</span>
+                <span
+                    class="absolute inset-0 bg-gold-primary/20 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500"></span>
+            </button>
+
+            <p class="text-gold-primary/40 text-[10px] mt-4 uppercase tracking-[0.3em] city-fade">Tap to Open</p>
+        </div>
+    </div>
+
+    <!-- Main Invitation -->
+    <main
+        class="relative z-10 w-full min-h-screen flex flex-col items-center justify-center py-6 md:py-12 px-2 overflow-hidden">
+
+        <svg class="mandala-bg" viewBox="0 0 100 100">
+            <path d="M50 0 L60 40 L100 50 L60 60 L50 100 L40 60 L0 50 L40 40 Z" fill="#D4AF37" />
+        </svg>
+
+        <div class="glass-card rounded-2xl md:rounded-3xl overflow-hidden px-4 py-8 md:px-12 md:py-16 text-center">
+            <!-- Decorative Frame -->
+            <div class="traditional-frame"></div>
+            <div class="corner tl"></div>
+            <div class="corner tr"></div>
+            <div class="corner bl"></div>
+            <div class="corner br"></div>
+
+            <!-- Ganesh Shlok -->
+            <div class="mb-8">
+                <p class="text-maroon font-extrabold text-xl tracking-widest mb-1">॥ श्री गणेशाय नमः ॥</p>
+                <div class="h-0.5 w-20 bg-gold-primary mx-auto"></div>
+            </div>
+
+            <!-- Guest Welcome -->
+            <div id="guest-box" class="hidden mb-10">
+                <p class="text-gray-400 text-[10px] uppercase tracking-[0.3em] mb-2">सादर आमंत्रण</p>
+                <h2 id="guest-name"
+                    class="text-3xl md:text-5xl text-maroon font-bold font-serif border-y border-gold-primary/30 py-2">
+                </h2>
+            </div>
+
+            <!-- Title -->
+            <div class="mb-12 mt-20 relative z-10 p-4">
+                <h1 class="text-6xl md:text-8xl gold-text-premium leading-relaxed py-4"
+                    style="font-family: 'Great Vibes', cursive;">Shubh Vivah</h1>
+                <p class="text-maroon font-bold tracking-[0.4em] uppercase text-xs md:text-sm mt-[-10px]">॥ शुभ विवाह ॥
+                </p>
+            </div>
+
+            <!-- Couple Section -->
+            <div class="flex flex-col items-center justify-center gap-4 mb-14">
+                <div class="w-full">
+                    <span class="text-stone-600 text-[10px] uppercase tracking-widest block mb-4 font-bold">चि.
+                        (वर)</span>
+                    <h3 class="text-6xl md:text-8xl text-maroon font-yatra leading-tight mt-2 drop-shadow-sm">सुरेंद्र
+                    </h3>
+                    <p class="text-xs text-gray-500 italic mt-2 font-serif">(सोनू)</p>
+                </div>
+
+                <div class="flex items-center gap-3 py-2">
+                    <div class="h-px w-16 bg-gold-primary/50"></div>
+                    <span class="text-2xl md:text-3xl gold-text-premium font-yatra pt-1">संग</span>
+                    <div class="h-px w-16 bg-gold-primary/50"></div>
+                </div>
+
+                <div class="w-full">
+                    <span class="text-stone-600 text-[10px] uppercase tracking-widest block mb-4 font-bold">सौ. कां.
+                        (वधु)</span>
+                    <h3 class="text-6xl md:text-8xl text-maroon font-yatra leading-tight mt-2 drop-shadow-sm">आरती</h3>
+                </div>
+            </div>
+
+            <!-- Invite Text -->
+            <!-- Invite Text -->
+            <p class="text-gray-700 text-sm md:text-lg mb-12 leading-relaxed px-2">
+                खुशियों का दिन, प्यार का सफर, आपकी उपस्थिति से होगा और बेहतर। <br class="block mt-2">
+                शादी के इस पावन अवसर पर, आपको सादर आमंत्रित किया जाता है।
+            </p>
+
+            <!-- Event Card -->
+            <div class="bg-white/60 border-l-4 border-maroon p-6 mb-12 shadow-sm text-left">
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="text-2xl">💍</span>
+                    <h4 class="text-2xl font-bold text-maroon">॥ प्रीतिभोज ॥</h4>
+                </div>
+
+                <div class="space-y-4">
+                    <div class="flex items-start gap-3">
+                        <span class="text-gold-primary mt-1">🗓️</span>
+                        <div>
+                            <p class="font-bold text-lg">दिनांक 25.01.2026 रविवार</p>
+                            <p class="text-xs text-gray-500 uppercase tracking-tighter">माघ कृष्ण 7</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="text-gold-primary">⏰</span>
+                        <p class="text-gray-700">सायं 7 बजे से आपके आगमन तक..</p>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="text-gold-primary mt-1">📍</span>
+                        <div class="text-sm">
+                            <p class="font-bold">क्षत्रिय कुशवाह समाज धर्मशाला</p>
+                            <p class="text-gray-600">जीवाजीगढ़ त.टोंकखुर्द जि.देवास म.प्र.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Family -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 border-t border-gold-primary/20 pt-10 text-sm">
+                <div class="space-y-1">
+                    <p class="text-maroon font-bold uppercase tracking-widest mb-2">प्रेषक</p>
+                    <p class="text-lg font-bold">ठा. सा. अम्बारामजी कुशवाह</p>
+                    <p class="text-lg font-bold">कुँ. श्री शंकरसिंह कुशवाह</p>
+                    <p class="text-gray-600 font-medium">ग्राम- जिवाजीगढ़ त. टोंकखुर्द जि.देवास</p>
+                </div>
+                <div class="space-y-1">
+                    <p class="text-maroon font-bold uppercase tracking-widest mb-2">संपर्क सूत्र</p>
+                    <p class="font-mono text-gray-800">7722882331, 8462953637,</p>
+                    <p class="font-mono text-gray-800">9826255830</p>
+                </div>
+            </div>
+
+            <!-- Nav Button -->
+            <div class="mt-16">
+                <a href="https://www.google.com/maps/search/Kshatriya+Kushwah+Samaj+Dharmshala+Dewas" target="_blank"
+                    class="inline-flex items-center gap-3 bg-maroon text-white px-10 py-4 rounded-full shadow-2xl hover:scale-105 active:scale-95 transition font-bold uppercase tracking-widest text-xs">
+                    <span>🗺️</span> लोकेशन देखें (Google Maps)
+                </a>
+            </div>
+
+            <div class="mt-20 opacity-30 text-[10px] uppercase tracking-widest">Awaited by: Friends & Family</div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const guest = params.get('guest');
+            if (guest) {
+                // Add double quotes around the name as requested
+                document.getElementById('guest-name').innerText = `"${guest}"`;
+                document.getElementById('env-guest').innerText = `To: "${guest}"`;
+                document.getElementById('guest-box').classList.remove('hidden');
+            }
+        });
+
+        const audio = document.getElementById('bg-music');
+        const musicBtn = document.getElementById('music-btn');
+        let isPlaying = false;
+
+        function openInvitation() {
+            const env = document.getElementById('main-envelope');
+            env.classList.add('open');
+
+            // Wait longer for the realistic animation (flap + slide out)
+            setTimeout(() => {
+                // document.body.classList.add('opened'); // Removed auto-hide as requested
+
+                // Show music button
+                musicBtn.classList.remove('hidden');
+
+                startPetals();
+                // Try playing music
+                audio.volume = 0.6;
+                audio.play().then(() => {
+                    isPlaying = true;
+                }).catch(e => {
+                    console.log("Music blocked", e);
+                    // Update icon to show muted state if play failed
+                    musicBtn.innerText = '🔇';
+                });
+            }, 3500); // Increased duration for full sequence
+        }
+
+        function toggleMusic() {
+            if (isPlaying) {
+                audio.pause();
+                musicBtn.innerText = '🔇';
+                musicBtn.classList.add('opacity-50');
+            } else {
+                audio.play();
+                musicBtn.innerText = '🎵';
+                musicBtn.classList.remove('opacity-50');
+            }
+            isPlaying = !isPlaying;
+        }
+
+        function startPetals() {
+            setInterval(() => {
+                const p = document.createElement('div');
+                p.className = 'petal';
+                const size = Math.random() * 10 + 10;
+                p.style.width = size + 'px';
+                p.style.height = size + 'px';
+                p.style.left = Math.random() * 100 + 'vw';
+                p.style.top = '-20px';
+                p.style.animationDuration = (Math.random() * 3 + 4) + 's';
+
+                const hues = ['#8B0000', '#D4AF37', '#FF0000', '#C21807'];
+                p.style.backgroundColor = hues[Math.floor(Math.random() * hues.length)];
+
+                document.body.appendChild(p);
+                setTimeout(() => p.remove(), 7000);
+            }, 350);
+        }
+    </script>
+</body>
+
+</html>
